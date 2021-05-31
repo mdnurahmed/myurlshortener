@@ -48,10 +48,10 @@ Total Possible short urls , 36P7 = 42072307200 ~ 4*10^10 . So probabilty of coll
 
 | After Short Urls Created  | Collision probability      | 
 | --------------------------| ---------------------------|
-| 1 thousand (1000)         | 1 in 10 million requests   |
-| 10 thousand (10,000)      | 1 in 1 million requests    |
-| 100 thousand (100,000)    | 1 in 100 thousand requests |
-| 1 million (1000000)       | 1 in 10 thousand requests  |
+| 1 thousand (1000)         | 1 in 40 million requests   |
+| 10 thousand (10,000)      | 1 in 4 million requests    |
+| 100 thousand (100,000)    | 1 in 400 thousand requests |
+| 1 million (1000000)       | 1 in 40 thousand requests  |
 ## Concurrency 
 Two different processes could generate same short url and write them to database. We solved this problem here using conditional expression. An insert will not suceed if the same short url is already in the database.
 ## Caching
