@@ -3,5 +3,6 @@ A simple url shortener with authentication and authorization using gin-gonic frm
 [#Live Demo](https://d1nkdlbzuru4c8.cloudfront.net)
 
 
-#Architecture 
-<img src="https://github.com/mdnurahmed/myurlshortener/architecure.jpeg"/>
+# Architecture 
+![Image of Architecure](https://github.com/mdnurahmed/myurlshortener/architecure.jpeg)
+
