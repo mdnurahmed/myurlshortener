@@ -42,4 +42,8 @@ npm start
 docker-compose -f reactapp.yaml up --build
 ```
 
+# After Thoughts 
+## Caching
+we could have used dax caching with dynamodb for the 'get all url' api . But dax is a write through cache . so in that case after we delete an url , it would still appear in 'get all url' calls even if we delete it through dax cause that would be in the query cache , not in them item cache . we could solve this by keeping TTL of dax low or do an asynchronous query call after we delete (using go routines) so the query cache will also be updated . It's pointless to do the delete call through dax as it has no impact but will increase latency , so we can do the delete call bypassing dax completely .  
+
 
