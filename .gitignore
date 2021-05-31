@@ -1,0 +1,11 @@
+#sam files
+/Backend/.aws-sam
+/Backend/samconfig.toml
+
+#vscode files
+/Backend/.vscode
+/Frontend/.vscode
+
+#buildfiles
+/Frontend/build
+/Backend/UrlShortener/UrlShortener

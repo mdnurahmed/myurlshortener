@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  go-web-app:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8080"
+    environment : 
+      - AWS_ACCESS_KEY_ID=AKIAZUKVEITZ6GMN6OEM
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_DEFAULT_REGION=us-west-2

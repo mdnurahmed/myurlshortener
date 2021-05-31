@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lamdize
+  
+  Sample SAM Template for lamdize
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 5
+
+Resources:
+  UrlShortener:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: UrlShortener/
+      Handler: UrlShortener
+      Runtime: go1.x
+      Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+      Environment:
+        Variables:
+          Lambda : "True"
+          TableName : MyUrlShortener
+          LongUrlIndexName : long_url_ndex
+          ShortUrlIndexName : short_url_index
+          PublicKeysURL : https://cognito-idp.us-west-2.amazonaws.com/us-west-2_dLWA8fRYj/.well-known/jwks.json
+          Region : us-west-2
+          ClientId : 783avre1dn5dp23pvdr1oi5tb8
+          BaseUrl : http://localhost:8080/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "*"
+
+
