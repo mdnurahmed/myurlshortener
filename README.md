@@ -6,5 +6,5 @@ A simple url shortener with authentication and authorization using gin-gonic frm
 
 
 # Architecture 
-![Image of Architecure](https://github.com/mdnurahmed/myurlshortener/architecure.jpeg)
+![Image of Architecure](https://github.com/mdnurahmed/myurlshortener/blob/main/architecure.jpeg)
 
