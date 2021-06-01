@@ -26,13 +26,20 @@ Resources:
             Method: any
       Environment:
         Variables:
+          # this variable decides whether to run the app as a lambda function or not 
           Lambda : "True"
-          TableName : MyUrlShortener
-          LongUrlIndexName : long_url_ndex
-          ShortUrlIndexName : short_url_index
-          PublicKeysURL : https://cognito-idp.us-west-2.amazonaws.com/us-west-2_dLWA8fRYj/.well-known/jwks.json
-          Region : us-west-2
-          ClientId : 783avre1dn5dp23pvdr1oi5tb8
+          #dynamo table name
+          TableName :
+          #index names 
+          LongUrlIndexName : 
+          ShortUrlIndexName : 
+          #public key for jwt token validation for cognito 
+          #it usually has format like https://cognito-idp.{REGION}.amazonaws.com/{REGION}_dLWA8fRYj/.well-known/jwks.json
+          PublicKeysURL :
+          #region of database 
+          Region : 
+          #cognito client id 
+          ClientId : 
           BaseUrl : http://localhost:8080/
       Policies:
         - DynamoDBCrudPolicy:
