@@ -55,6 +55,6 @@ Total Possible short urls , 36P7 = 42072307200 ~ 4*10^10 . So probabilty of coll
 ## Concurrency 
 Two different processes could generate same short url and write them to database. We solved this problem here using conditional expression. An insert will not suceed if the same short url is already in the database.
 ## Caching
-We could have used dax caching with dynamodb for the 'get all url' api . But dax is a write through cache . so in that case after we delete an url , it would still appear in 'get all url' calls even if we delete it through dax cause that would be in the query cache , not in them item cache . we could somewhat solve this by keeping TTL of dax low but the trade-off is user experience . It's pointless to do the delete call through dax as it has no impact but will increase latency , so we can do the delete call bypassing dax completely .  
+We could have used dax caching with dynamodb for the 'get all url' and 'redirect' api . But dax is a write through cache . so in that case after we delete an url , it would still appear in 'get all url' calls and redirects even if we delete it through dax cause they would be in the query cache , not in them item cache . we could somewhat solve this by keeping TTL of dax low but the trade-off is user experience . It's pointless to do the delete call through dax as it has no impact but will increase latency , so we can do the delete call bypassing dax completely .  
 
 
