@@ -44,7 +44,7 @@ docker-compose -f reactapp.yaml up --build
 
 # After Thoughts 
 ## Collisions
-Total Possible short urls , 36P7 = 42072307200 ~ 4*10^10 . So probabilty of collsions - 
+Total Possible short urls , 36P7 = 42072307200 ~ 4*10^10 . So probabilty of collisions - 
 
 | After Short Urls Created  | Collision probability      | 
 | --------------------------| ---------------------------|
