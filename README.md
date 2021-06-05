@@ -13,10 +13,95 @@ A simple url shortener with authentication and authorization using gin-gonic frm
 - [Go](https://golang.org/doc/install)
 - [Node.js](https://nodejs.org/en/download/)
 - or [Docker](https://docs.docker.com/get-docker/)
+
+## Blueprint of the DynamoDB table 
+
+Cloudformation template 
+```
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters : 
+  MyTableName:
+    Type : String 
+    Description : Name of the DynamoDB table
+    Default : MYURLSHORTENER
+  UserIDAttributeName:
+    Type : String 
+    Description : Name of the user id atrribute
+    Default : user_id
+  ShortUrlAttributeName:
+    Type : String 
+    Description : Name of the short url atrribute
+    Default : short_url
+  LongUrlAttributeName:
+    Type : String 
+    Description : Name of the long url atrribute
+    Default : long_url
+  ShortUrlIndexName:
+    Type : String 
+    Description : Name of the short url index
+    Default : short_url_index
+  LongUrlIndexName:
+    Type : String 
+    Description : Name of the long url index
+    Default : long_url_index
+
+Resources:
+  myDynamoDBTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName : !Ref MyTableName
+      AttributeDefinitions: 
+        - 
+          AttributeName: !Ref UserIDAttributeName
+          AttributeType: "S"
+        - 
+          AttributeName: !Ref ShortUrlAttributeName
+          AttributeType: "S"
+        - 
+          AttributeName: !Ref LongUrlAttributeName
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: !Ref UserIDAttributeName
+          KeyType: "HASH"
+        - 
+          AttributeName: !Ref ShortUrlAttributeName
+          KeyType: "RANGE"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      GlobalSecondaryIndexes: 
+        - 
+          IndexName: !Ref LongUrlIndexName
+          KeySchema: 
+            - 
+              AttributeName: !Ref LongUrlAttributeName
+              KeyType: "HASH"
+          Projection: 
+            ProjectionType: "ALL"
+          ProvisionedThroughput: 
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+        - 
+          IndexName: !Ref ShortUrlIndexName
+          KeySchema: 
+            - 
+              AttributeName: !Ref ShortUrlAttributeName
+              KeyType: "HASH"
+          Projection: 
+            ProjectionType: "ALL"
+          ProvisionedThroughput: 
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+      
+```
+### Blueprint of the Cognito
+
 ## How to run locally
 First clone the repo  
 ```
-https://github.com/mdnurahmed/myurlshortener.git
+git clone https://github.com/mdnurahmed/myurlshortener.git
 cd myurlshortener/Backend/UrlShortener
 ```
 Then fill up the [backend environment variables](https://github.com/mdnurahmed/myurlshortener/blob/main/Backend/UrlShortener/app.env).Then run the backend
